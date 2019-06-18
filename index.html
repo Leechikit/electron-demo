@@ -9,5 +9,16 @@
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+    <script>
+      const { ipcRenderer } = require('electron')
+      const updateOnlineStatus = () => {
+        ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
+      }
+    
+      window.addEventListener('online',  updateOnlineStatus)
+      window.addEventListener('offline',  updateOnlineStatus)
+    
+      updateOnlineStatus()
+    </script>
   </body>
 </html>
